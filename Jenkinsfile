@@ -14,12 +14,13 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        /*
         stage('Deploy') {
             steps {
                 // Add deployment steps here, such as deploying to a server
                 sh 'mvn deploy'
             }
-        }
+        }*/
     }
     
     post {
