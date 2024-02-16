@@ -21,6 +21,19 @@ pipeline {
                 sh 'mvn deploy'
             }
         }*/
+         stage('Clean') {
+            steps {
+                // Add test steps here
+                sh 'mvn clean'
+            }
+        }
+         stage('SonarQube') {
+            steps {
+                // Add test steps here
+                withSonarQubeEnv('SonarQube')
+                sh 'mvn sonar:sonar'
+            }
+        }
     }
     
     post {
