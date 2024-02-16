@@ -72,7 +72,11 @@
             </plugin>
             <!-- SonarQube Plugin -->
             <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
-
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.6.1.1688</version>
+            </plugin>
 
             <!-- SonarQube creator plugin-->
             <plugin>
@@ -89,6 +93,8 @@
                     <outputDirectory>${dependency.check.report.dir}</outputDirectory>
                 </configuration>
             </plugin>
+
+
         </plugins>
     </build>
 
