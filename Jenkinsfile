@@ -39,7 +39,7 @@ pipeline {
          stage('SonarQube') {
             steps {
                 // Add test steps here
-                withSonarQubeEnv('SonarQube')
+                //withSonarQubeEnv('SonarQube')
                 sh 'mvn sonar:sonar'
             }
         }
