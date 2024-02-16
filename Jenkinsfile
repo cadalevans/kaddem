@@ -27,6 +27,15 @@ pipeline {
                 sh 'mvn clean'
             }
         }
+          stage('Checkout GIT') {
+            steps {
+                echo 'pulling...'
+                    git branch: 'feature',
+                    url : 'https://github.com/cadalevans/kaddem.git'
+                // Add test steps here
+               
+            }
+        }
          stage('SonarQube') {
             steps {
                 // Add test steps here
