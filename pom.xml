@@ -47,12 +47,7 @@
             <version>1.6.9</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.codehaus.sonar.plugins/sonar-core-plugin -->
-        <dependency>
-            <groupId>org.codehaus.sonar.plugins</groupId>
-            <artifactId>sonar-core-plugin</artifactId>
-            <version>3.3.1</version>
-            <scope>test</scope>
-        </dependency>
+        
 
 
 
