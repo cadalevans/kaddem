@@ -2,6 +2,14 @@ pipeline {
     agent any
     
     stages {
+
+          stage('Clean') {
+            steps {
+                // Add test steps here
+                sh 'mvn clean'
+            }
+        }
+        
         stage('Build') {
             steps {
                 // Add build steps here, such as compiling code, running tests, etc.
@@ -21,12 +29,7 @@ pipeline {
                 sh 'mvn deploy'
             }
         }*/
-         stage('Clean') {
-            steps {
-                // Add test steps here
-                sh 'mvn clean'
-            }
-        }
+       
           stage('Checkout GIT') {
             steps {
                 echo 'pulling...'
