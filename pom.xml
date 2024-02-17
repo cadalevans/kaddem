@@ -46,7 +46,14 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.9</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+        <!-- https://mvnrepository.com/artifact/org.codehaus.sonar.plugins/sonar-core-plugin -->
+        <dependency>
+            <groupId>org.codehaus.sonar.plugins</groupId>
+            <artifactId>sonar-core-plugin</artifactId>
+            <version>3.3.1</version>
+            <scope>test</scope>
+        </dependency>
+
 
 
 
@@ -70,11 +77,7 @@
             <!-- SonarQube Plugin -->
             <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
 
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.6.0.1398</version>
-            </plugin>
+
 
         </plugins>
     </build>
