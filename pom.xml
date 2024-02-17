@@ -17,6 +17,7 @@
         <java.version>1.8</java.version>
         <sonar.login>admin</sonar.login>
         <sonar.password>sonar</sonar.password>
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
 
     </properties>
     <dependencies>
