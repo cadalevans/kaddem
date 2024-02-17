@@ -47,6 +47,18 @@ pipeline {
             }
         }
     }
+
+    // Jacoco plugin with Jenkins
+
+        post {
+        success {
+            jacoco(
+                execPattern: '**/build/jacoco/*.exec',
+                classPattern: '**/build/classes/java/main',
+                sourcePattern: '**/src/main'
+            )
+        }
+    }
     
     post {
         always {
