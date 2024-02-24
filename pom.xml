@@ -50,11 +50,29 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.9</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.7.1.201405082137</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <version>0.7.5.201505241946</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.12.4</version> <!-- Use the latest version -->
+            <scope>test</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.codehaus.sonar.plugins/sonar-core-plugin -->
-
-
-
-
 
 
     </dependencies>
@@ -71,10 +89,52 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+
                 </configuration>
             </plugin>
-            <!-- SonarQube Plugin -->
-            <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+            <!-- Jacoco Plugin -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.1.201405082137</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- attached to Maven test phase -->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.9</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
 
 
 

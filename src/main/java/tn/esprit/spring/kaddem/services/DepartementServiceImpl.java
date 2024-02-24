@@ -1,5 +1,6 @@
 package tn.esprit.spring.kaddem.services;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,21 +22,27 @@ public class DepartementServiceImpl implements IDepartementService{
 		return (List<Departement>) departementRepository.findAll();
 	}
 
+
 	public Departement addDepartement (Departement d){
 		return departementRepository.save(d);
 	}
+
 
 	public   Departement updateDepartement (Departement d){
 		return departementRepository.save(d);
 	}
 
+
 	public  Departement retrieveDepartement (Integer idDepart){
 		return departementRepository.findById(idDepart).get();
 	}
+
 	public  void deleteDepartement(Integer idDepartement){
 		Departement d=retrieveDepartement(idDepartement);
 		departementRepository.delete(d);
 	}
+
+
 
 
 

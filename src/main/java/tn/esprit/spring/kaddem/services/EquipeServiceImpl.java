@@ -1,6 +1,7 @@
 package tn.esprit.spring.kaddem.services;
 
 import lombok.AllArgsConstructor;
+import org.junit.Test;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ public class EquipeServiceImpl implements IEquipeService{
 		return (equipeRepository.save(e));
 	}
 
+
 	public  void deleteEquipe(Integer idEquipe){
 		Equipe e=retrieveEquipe(idEquipe);
 		equipeRepository.delete(e);
@@ -40,6 +42,7 @@ public class EquipeServiceImpl implements IEquipeService{
 	public Equipe updateEquipe(Equipe e){
 	return (	equipeRepository.save(e));
 	}
+
 
 	public void evoluerEquipes(){
 		List<Equipe> equipes = (List<Equipe>) equipeRepository.findAll();
