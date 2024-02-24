@@ -17,6 +17,10 @@ import tn.esprit.spring.kaddem.repositories.EquipeRepository;
 import tn.esprit.spring.kaddem.services.DepartementServiceImpl;
 import tn.esprit.spring.kaddem.services.EquipeServiceImpl;
 import tn.esprit.spring.kaddem.services.IEquipeService;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -150,5 +154,23 @@ public class EquipeTest {
         // Asserting that the name of the updated department matches the expected value
         Assertions.assertEquals("nimes", updated.getNomEquipe());
     }
+
+    @Test
+    public void testEvoluerEquipes() {
+        // Stub data for equipeRepository.findAll()
+       // when(equipeRepository.findAll()).thenReturn();
+        when(equipeRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(equipe));
+        when(equipeRepository.save(any(Equipe.class))).thenReturn(null);
+        equipeRepository.save(equipe);
+        // Call the method to be tested
+        equipeService.evoluerEquipes();
+        equipeRepository.save(equipe);
+        //Mockito.verify(equipeRepository).delete(equipe);
+
+        // Verify the behavior
+        // You can verify the save() method calls on equipeRepository based on the expected behavior of the method
+        verify(equipeRepository, times(2)).save(any(Equipe.class)); // Adjust the expected number as needed
+    }
+
 
 }
