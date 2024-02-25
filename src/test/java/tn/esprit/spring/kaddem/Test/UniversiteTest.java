@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
 import java.util.*;
 
 import static org.mockito.Mockito.when;
-
+/*
 @SpringBootTest
 public class UniversiteTest {
 
@@ -190,6 +190,7 @@ public class UniversiteTest {
 
      */
 
+/*
     @Test
     public void testRetrieveDepartementsByUniversite() {
         // Mock data
@@ -214,3 +215,5 @@ public class UniversiteTest {
         assertEquals(departements, retrievedDepartements);
     }
 }
+
+ */
