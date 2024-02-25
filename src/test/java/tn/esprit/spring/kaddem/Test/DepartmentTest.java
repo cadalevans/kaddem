@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 
 public class DepartmentTest {
 
+    /*
     @InjectMocks
     IDepartementService iDepartementService=new IDepartementService() {
         @Override
@@ -57,8 +58,11 @@ public class DepartmentTest {
         }
     };
 
+     */
+    @Mock
+    IDepartementService iDepartementService;
+
     @Test
-    @Order(1)
     public void testRetrievAllDepartement(){
         when(iDepartementService.retrieveAllDepartements()).thenReturn(Collections.emptyList());
 
