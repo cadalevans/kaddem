@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Add build steps here, such as compiling code, running tests, etc.
-                sh 'mvn test '
+                sh 'mvn clean'
             }
         }/*
         stage('JUNIT/MOCKITO') {
@@ -29,7 +29,7 @@ pipeline {
                 // Add deployment steps here, such as deploying to a server
                 sh 'mvn deploy'
             }
-        }*/
+        }
        
           stage('Checkout GIT') {
             steps {
@@ -47,6 +47,7 @@ pipeline {
                 sh 'mvn sonar:sonar'
             }
         }
+        */
 
         stage('Nexus') {
                     steps {
