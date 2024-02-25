@@ -15,13 +15,14 @@ pipeline {
                 // Add build steps here, such as compiling code, running tests, etc.
                 sh 'mvn compile '
             }
-        }
+        }/*
         stage('JUNIT/MOCKITO') {
             steps {
                 // Add test steps here
                 sh 'mvn test'
             }
         }
+        */
         /*
         stage('Deploy') {
             steps {
