@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Add build steps here, such as compiling code, running tests, etc.
-                sh 'mvn clean install'
+                sh 'mvn clean '
             }
         }
         stage('JUNIT/MOCKITO') {
