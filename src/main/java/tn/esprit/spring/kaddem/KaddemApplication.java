@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 public class KaddemApplication {
 
-    @Test
+
     public static void main(String[] args) {
         SpringApplication.run(KaddemApplication.class, args);
     }
