@@ -16,7 +16,7 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage('Test') {
+        stage('JUNIT/MOCKITO') {
             steps {
                 // Add test steps here
                 sh 'mvn test'
@@ -45,6 +45,17 @@ pipeline {
                 //withSonarQubeEnv('SonarQube')
                 sh 'mvn sonar:sonar'
             }
+        }
+
+        stage('Nexus') {
+                    steps {
+                                    // Deploy the artifacts to Nexus repository
+                                    script {
+                                        def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
+                                        mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://localhost:8081/repository/maven-releases/' // Nexus repository URL
+                                        sh mvnCmd
+                                    }
+                    }
         }
     }
 

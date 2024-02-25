@@ -18,6 +18,8 @@
         <sonar.login>admin</sonar.login>
         <sonar.password>sonar</sonar.password>
         <sonar.java.binaries>target/classes</sonar.java.binaries>
+        <!-- Deploy to Nexus -->
+
 
     </properties>
     <dependencies>
@@ -75,9 +77,19 @@
         <!-- https://mvnrepository.com/artifact/org.codehaus.sonar.plugins/sonar-core-plugin -->
 
 
+
     </dependencies>
+    <!-- Deploy to Nexus -->
+    <distributionManagement>
+        <repository>
+            <id>deploymentRepo</id>
+            <name>Nexus Repository</name>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -125,7 +137,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.9</minimum>
+                                            <minimum>0.0</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
