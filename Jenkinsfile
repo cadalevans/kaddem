@@ -15,14 +15,14 @@ pipeline {
                 // Add build steps here, such as compiling code, running tests, etc.
                 sh 'mvn clean'
             }
-        }/*
+        }
         stage('JUNIT/MOCKITO') {
             steps {
                 // Add test steps here
                 sh 'mvn test'
             }
         }
-        */
+
         /*
         stage('Deploy') {
             steps {
@@ -40,6 +40,8 @@ pipeline {
                
             }
         }
+
+        /*
          stage('SonarQube') {
             steps {
                 // Add test steps here
