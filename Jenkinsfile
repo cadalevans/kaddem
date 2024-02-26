@@ -67,18 +67,28 @@ pipeline {
 
     
     
-    post {
-        always {
-            // Clean up steps, if needed
-            deleteDir()
-        }
-        success {
-            // Actions to perform if the pipeline succeeds
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            // Actions to perform if the pipeline fails
-            echo 'Pipeline failed!'
-        }
-    }
-}
+  post {
+          always {
+              // Nettoyez les étapes, si nécessaire
+              deleteDir()
+          }
+          success {
+              // Actions à effectuer si le pipeline réussit
+              echo 'Pipeline réussi!'
+              emailext(
+                  to: 'mandoupam@gmail.com', // Remplacez par l'adresse e-mail destinataire
+                  subject: 'Notification de build Jenkins - Succès',
+                  body: 'Le build Jenkins a réussi.'
+              )
+          }
+          failure {
+              // Actions à effectuer si le pipeline échoue
+              echo 'Pipeline échoué!'
+              emailext(
+                  to: 'mandoupam@gmail.com', // Remplacez par l'adresse e-mail destinataire
+                  subject: 'Notification de build Jenkins - Échec',
+                  body: 'Le build Jenkins a échoué.'
+              )
+          }
+      }
+  }
