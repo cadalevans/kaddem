@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
-/*
+
 @SpringBootTest
 public class EquipeTest {
 
@@ -175,4 +175,4 @@ public class EquipeTest {
 
 }
 
- */
+

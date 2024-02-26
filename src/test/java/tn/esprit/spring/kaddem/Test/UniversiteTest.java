@@ -26,12 +26,12 @@ import static org.mockito.Mockito.*;
 import java.util.*;
 
 import static org.mockito.Mockito.when;
-/*
+
 @SpringBootTest
 public class UniversiteTest {
 
     @InjectMocks
-    IUniversiteService iUniversiteService= new IUniversiteService() {
+    IUniversiteService iUniversiteService = new IUniversiteService() {
         @Override
         public List<Universite> retrieveAllUniversites() {
             return null;
@@ -70,9 +70,10 @@ public class UniversiteTest {
 
     @Mock
     IUniversiteService iUniversiteServices = Mockito.mock(IUniversiteService.class);
+
     @Test
     @Order(3)
-    public void testRetrieveAllUniversites(){
+    public void testRetrieveAllUniversites() {
         when(iUniversiteServices.retrieveAllUniversites()).thenReturn(Collections.emptyList());
 
         List<Universite> universiteList = universiteService.retrieveAllUniversites();
@@ -92,19 +93,20 @@ public class UniversiteTest {
     }
 
     @Mock
-    UniversiteRepository universiteRepository=  Mockito.mock(UniversiteRepository.class);
+    UniversiteRepository universiteRepository = Mockito.mock(UniversiteRepository.class);
     @InjectMocks
     UniversiteServiceImpl universiteService;
 
-    Universite universite = new Universite(1,"Esprit");
+    Universite universite = new Universite(1, "Esprit");
 
-    List<Universite> listUniversite = new ArrayList<Universite>(){
+    List<Universite> listUniversite = new ArrayList<Universite>() {
         {
-            add(new Universite(1,"Esprit"));
-            add(new Universite(2,"UMT"));
+            add(new Universite(1, "Esprit"));
+            add(new Universite(2, "UMT"));
         }
     };
-//Universite
+
+    //Universite
     @Test
     public void testRetrieveUniversite() {
         when(universiteRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(universite));
@@ -133,6 +135,7 @@ public class UniversiteTest {
         assertEquals(u, addedUniversite);
         // You can add more assertions if needed
     }
+
     @Test
     public void testUpdateUniversite() {
         // Mocking behavior to return optional containing a Departement object
@@ -190,7 +193,7 @@ public class UniversiteTest {
 
      */
 
-/*
+
     @Test
     public void testRetrieveDepartementsByUniversite() {
         // Mock data
@@ -216,4 +219,6 @@ public class UniversiteTest {
     }
 }
 
- */
+
+
+
