@@ -3,7 +3,7 @@ pipeline {
     
     stages {
 
-          stage('Clean') {
+         stage('Clean') {
             steps {
                 // Add test steps here
                 sh 'mvn clean'
@@ -24,7 +24,7 @@ pipeline {
             }
         }
        
-          stage('Checkout GIT') {
+         stage('Checkout GIT') {
             steps {
                 echo 'pulling...'
                     git branch: 'feature',
@@ -57,12 +57,12 @@ pipeline {
     }
 
 
-       stage('JUNIT/MOCKITO') {
+        stage('JUNIT/MOCKITO') {
                 steps {
                     // Add test steps here
                     sh 'mvn test'
                 }
-            }
+        }
 
     // Jacoco plugin with Jenkins
 
