@@ -42,7 +42,7 @@ pipeline {
             }
         }
 
-        /*
+        */
          stage('SonarQube') {
             steps {
                 // Add test steps here
@@ -50,7 +50,7 @@ pipeline {
                 sh 'mvn sonar:sonar'
             }
         }
-        */
+
 
         stage('Nexus') {
                     steps {
