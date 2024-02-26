@@ -3,10 +3,12 @@ package tn.esprit.spring.kaddem.Test;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,6 +26,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 
 //@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
@@ -102,10 +105,6 @@ public class DepartmentTest {
         Assertions.assertNotNull(departement1);
     }
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void testAddDepartement() {

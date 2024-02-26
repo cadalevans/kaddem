@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.kaddem.entities.Departement;
 import tn.esprit.spring.kaddem.entities.Equipe;
@@ -30,6 +32,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 public class EquipeTest {
 
     @InjectMocks
@@ -113,10 +116,6 @@ public class EquipeTest {
         Assertions.assertNotNull(equipe1);
     }
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void testAddEquipe() {

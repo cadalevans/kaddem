@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.kaddem.entities.Departement;
 import tn.esprit.spring.kaddem.entities.Universite;
@@ -28,6 +30,7 @@ import java.util.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 public class UniversiteTest {
 
     @InjectMocks
@@ -114,10 +117,7 @@ public class UniversiteTest {
         Assertions.assertNotNull(universite1);
     }
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
+
 
     @Test
     public void testAddUniversite() {
