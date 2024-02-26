@@ -16,14 +16,7 @@ pipeline {
                 sh 'mvn clean'
             }
         }
-        stage('JUNIT/MOCKITO') {
-            steps {
-                // Add test steps here
-                sh 'mvn test'
-            }
-        }
 
-        /*
         stage('Deploy') {
             steps {
                 // Add deployment steps here, such as deploying to a server
@@ -41,7 +34,7 @@ pipeline {
             }
         }
 
-        /*
+
          stage('SonarQube') {
             steps {
                 // Add test steps here
@@ -49,7 +42,7 @@ pipeline {
                 sh 'mvn sonar:sonar'
             }
         }
-        */
+
 
         stage('Nexus') {
                     steps {
@@ -62,6 +55,14 @@ pipeline {
                     }
         }
     }
+
+
+       stage('JUNIT/MOCKITO') {
+                steps {
+                    // Add test steps here
+                    sh 'mvn test'
+                }
+            }
 
     // Jacoco plugin with Jenkins
 
