@@ -3,7 +3,7 @@ pipeline {
     
     stages {
 
-         stage('Clean') {
+          stage('Clean') {
             steps {
                 // Add test steps here
                 sh 'mvn clean'
@@ -17,6 +17,14 @@ pipeline {
             }
         }
 
+        stage('JUNIT/MOCKITO') {
+            steps {
+                // Add test steps here
+                sh 'mvn test'
+            }
+        }
+
+        /*
         stage('Deploy') {
             steps {
                 // Add deployment steps here, such as deploying to a server
@@ -24,7 +32,7 @@ pipeline {
             }
         }
        
-         stage('Checkout GIT') {
+          stage('Checkout GIT') {
             steps {
                 echo 'pulling...'
                     git branch: 'feature',
@@ -34,7 +42,7 @@ pipeline {
             }
         }
 
-
+        /*
          stage('SonarQube') {
             steps {
                 // Add test steps here
@@ -42,27 +50,19 @@ pipeline {
                 sh 'mvn sonar:sonar'
             }
         }
-
+        */
 
         stage('Nexus') {
                     steps {
                                     // Deploy the artifacts to Nexus repository
-                       script {
-                         def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
-                         mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://192.168.33.10:8081/repository/maven-snapshots/' // Nexus repository URL
-                         sh mvnCmd
+                                    script {
+                                        def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
+                                        mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://192.168.33.10:8081/repository/maven-snapshots/' // Nexus repository URL
+                                        sh mvnCmd
                                     }
                     }
         }
     }
-
-
-        stage('JUNIT/MOCKITO') {
-                steps {
-                    // Add test steps here
-                    sh 'mvn test'
-                }
-        }
 
     // Jacoco plugin with Jenkins
 
