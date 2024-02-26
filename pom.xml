@@ -129,7 +129,11 @@
                 <target>11</target>
             </configuration>
         </plugin>
-        <!-- Other plugins -->
+        <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.10.1.xxx</version> <!-- Use the latest version available -->
+        </plugin>
    
 
         </plugins>
