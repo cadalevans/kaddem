@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Add build steps here, such as compiling code, running tests, etc.
-                sh 'mvn clean'
+                sh 'mvn verify'
             }
         }
 
