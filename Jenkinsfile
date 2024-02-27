@@ -15,13 +15,6 @@ pipeline {
                // Execute Maven build with JaCoCo coverage
                                sh 'mvn clean install jacoco:prepare-agent test jacoco:report'
             }
-            post {
-                            always {
-                                // Archive les rapports de test Mockito JUnit
-                                junit 'target/surefire-reports/TEST-tn.esprit.rh.achat.FournisseurServiceStaticTest.xml'
-
-                            }
-                        }
         }
 
         stage('JUNIT/MOCKITO') {
@@ -29,14 +22,6 @@ pipeline {
                 // Add test steps here
                 sh 'mvn test'
             }
-               post {
-                            always {
-                                // Archive les rapports de test unitaires JUnit
-                                junit 'target/surefire-reports/TEST-*'
-
-
-                            }
-                        }
         }
 
         /*
@@ -72,7 +57,7 @@ pipeline {
                                     // Deploy the artifacts to Nexus repository
                                     script {
                                         def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
-                                        mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://192.168.33.10:8081/repository/maven-releases/' // Nexus repository URL
+                                        mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://192.168.33.10:8081/repository/maven-snapshots/' // Nexus repository URL
                                         sh mvnCmd
                                     }
                     }
