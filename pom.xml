@@ -46,7 +46,7 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.9</version>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
@@ -110,7 +110,7 @@
 
                 </configuration>
             </plugin>
-           <plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.6</version>
@@ -132,17 +132,13 @@
                     </execution>
                 </executions>
             </plugin>
-                 <plugin>
-                    <groupId>org.sonarsource.scanner.maven</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.7.0</version>
-                </plugin>
+            
 
 
 
 
         </plugins>
-            
+
 
     </build>
 
