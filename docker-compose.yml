@@ -20,7 +20,7 @@ services:
     image: haryoop/haryoop
     restart: on-failure
     ports:
-      - 8082:8082
+      - 8082:8089
     stdin_open: true
     tty: true
     environment:
