@@ -1,4 +1,4 @@
-//package tn.esprit.spring.kaddem.Test;
+package tn.esprit.spring.kaddem.Test;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
-/*
+
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class EquipeTest {
@@ -175,5 +175,3 @@ public class EquipeTest {
 }
 
 
-
- */

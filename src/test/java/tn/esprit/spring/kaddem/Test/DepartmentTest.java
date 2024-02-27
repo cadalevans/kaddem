@@ -13,17 +13,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import tn.esprit.spring.kaddem.controllers.DepartementRestController;
 import tn.esprit.spring.kaddem.entities.Departement;
+import tn.esprit.spring.kaddem.entities.Etudiant;
 import tn.esprit.spring.kaddem.repositories.DepartementRepository;
 import tn.esprit.spring.kaddem.services.DepartementServiceImpl;
 import tn.esprit.spring.kaddem.services.IDepartementService;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -33,12 +34,10 @@ import static org.mockito.Mockito.when;
 
 public class DepartmentTest {
 
-    private Departement departement;
+    //débuts autres methodes
+   // private Departement departement;
 
-    @BeforeEach
-    public void setUp() {
-        departement = new Departement();
-    }
+
 
     @Test
     public void testIdDepartement() {
@@ -52,18 +51,7 @@ public class DepartmentTest {
         assertEquals("Informatique", departement.getNomDepart());
     }
 
-}
-
-
-
-
-
-
-
-
-
-
-/*
+    //fin autres méthodes
     @Mock
     IDepartementService iDepartementService;
 
@@ -72,7 +60,7 @@ public class DepartmentTest {
         when(iDepartementService.retrieveAllDepartements()).thenReturn(Collections.emptyList());
 
         List<Departement> departementList = departementService.retrieveAllDepartements();
-        Assertions.assertEquals(0, departementList.size());
+        assertEquals(0, departementList.size());
     }
 
     @Test
@@ -84,7 +72,7 @@ public class DepartmentTest {
         departementService.deleteDepartement(2);
 
         // Verifying that the repository's delete method was called with the correct argument
-        Mockito.verify(departementRepository).delete(departement);
+        verify(departementRepository).delete(departement);
     }
 
     @Mock
@@ -104,7 +92,7 @@ public class DepartmentTest {
     public void testRetrieveDepartement() {
         when(departementRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(departement));
         Departement departement1 = departementService.retrieveDepartement(2);
-        Assertions.assertNotNull(departement1);
+        assertNotNull(departement1);
     }
 
 
@@ -120,8 +108,8 @@ public class DepartmentTest {
         Departement addedDepartement = departementService.addDepartement(d);
 
         // Then
-        Assertions.assertNotNull(addedDepartement);
-        Assertions.assertEquals(d, addedDepartement);
+        assertNotNull(addedDepartement);
+        assertEquals(d, addedDepartement);
         // You can add more assertions if needed
     }
     @Test
@@ -139,10 +127,129 @@ public class DepartmentTest {
         Departement updated = departementService.updateDepartement(updatedDepartement);
 
         // Asserting that the updatedDepartement object is not null
-        Assertions.assertNotNull(updated);
+        assertNotNull(updated);
 
         // Asserting that the name of the updated department matches the expected value
-        Assertions.assertEquals("Updated Department", updated.getNomDepart());
+        assertEquals("Updated Department", updated.getNomDepart());
     }
 
- */
+    @InjectMocks
+    private DepartementRestController departementController;
+    @Test
+    public void testGetDepartements() {
+        // Mock the service method
+        List<Departement> mockDepartements = new ArrayList<>();
+        mockDepartements.add(new Departement());
+        when(iDepartementService.retrieveAllDepartements()).thenReturn(mockDepartements);
+
+        // Call the controller method
+        List<Departement> result = departementController.getDepartements();
+
+        // Verify that the service method was called
+        verify(iDepartementService).retrieveAllDepartements();
+
+        // Assert the result
+        assertEquals(mockDepartements, result);
+    }
+
+    @Test
+    public void testRemoveDepartement() {
+        // Call the controller method
+        departementController.removeDepartement(1);
+
+        // Verify that the service method was called with the correct argument
+        verify(iDepartementService).deleteDepartement(1);
+    }
+
+    @Test
+    public void testUpdateDepartementController() {
+        // Create a sample Departement object
+        Departement departement = new Departement();
+        departement.setIdDepart(1);
+        departement.setNomDepart("Test Departement");
+
+        // Mock the service method
+        when(iDepartementService.updateDepartement(departement)).thenReturn(departement);
+
+        // Call the controller method
+        Departement result = departementController.updateDepartement(departement);
+
+        // Verify that the service method was called with the correct argument
+        verify(iDepartementService).updateDepartement(departement);
+
+        // Assert the result
+        assertEquals(departement, result);
+    }
+
+    @Test
+    public void testRetrieveDepartementController() {
+        // Create a sample Departement object
+        Departement departement = new Departement();
+        departement.setIdDepart(1);
+        departement.setNomDepart("Test Departement");
+
+        // Mock the service method
+        when(iDepartementService.retrieveDepartement(1)).thenReturn(departement);
+
+        // Call the controller method
+        Departement result = departementController.retrieveDepartement(1);
+
+        // Verify that the service method was called with the correct argument
+        verify(iDepartementService).retrieveDepartement(1);
+
+        // Assert the result
+        assertEquals(departement, result);
+    }
+
+    @Test
+    public void testAddDepartementController() {
+        // Create a sample Departement object
+        Departement departement = new Departement();
+        departement.setIdDepart(1);
+        departement.setNomDepart("Test Departement");
+
+        // Mock the service method
+        when(iDepartementService.addDepartement(departement)).thenReturn(departement);
+
+        // Call the controller method
+        Departement result = departementController.addDepartement(departement);
+
+        // Verify that the service method was called with the correct argument
+        verify(iDepartementService).addDepartement(departement);
+
+        // Assert the result
+        assertEquals(departement, result);
+    }
+
+    //test set and get etudiant
+
+    @Test
+    public void testSetAndGetEtudiants() {
+        // Create a sample set of etudiants
+        Set<Etudiant> etudiants = new HashSet<>();
+        etudiants.add(new Etudiant("John","Doe"));
+        etudiants.add(new Etudiant("Alice","Doe"));
+
+        // Set the etudiants using the setter method
+        departement.setEtudiants(etudiants);
+
+        // Get the etudiants using the getter method
+        Set<Etudiant> retrievedEtudiants = departement.getEtudiants();
+
+        // Check if the retrieved etudiants is not null
+        assertNotNull(retrievedEtudiants);
+
+        // Check if the retrieved etudiants is equal to the original set of etudiants
+        assertEquals(etudiants, retrievedEtudiants);
+    }
+
+    @Test
+    public void testConstructorWithNomDepart() {
+        // Create a new Departement object with a specified nomDepart
+        String nomDepart = "Computer Science";
+        Departement departement = new Departement(nomDepart);
+
+        // Verify that the nomDepart attribute is set correctly
+        assertEquals(nomDepart, departement.getNomDepart());
+    }
+}

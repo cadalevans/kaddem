@@ -28,7 +28,7 @@ import static org.mockito.Mockito.*;
 import java.util.*;
 
 import static org.mockito.Mockito.when;
-/*
+
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class UniversiteTest {
