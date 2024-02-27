@@ -12,8 +12,8 @@ pipeline {
         
         stage('Build') {
             steps {
-                // Add build steps here, such as compiling code, running tests, etc.
-                sh 'mvn verify'
+               // Execute Maven build with JaCoCo coverage
+                               sh 'mvn clean install jacoco:prepare-agent test jacoco:report'
             }
         }
 
@@ -31,7 +31,8 @@ pipeline {
                 sh 'mvn deploy'
             }
         }
-       
+
+        */
           stage('Checkout GIT') {
             steps {
                 echo 'pulling...'
@@ -42,7 +43,6 @@ pipeline {
             }
         }
 
-        */
          stage('SonarQube') {
             steps {
                 // Add test steps here
@@ -70,8 +70,8 @@ pipeline {
     
   post {
           always {
-              // Nettoyez les étapes, si nécessaire
-              deleteDir()
+             // Publish JaCoCo coverage report as artifact
+                         archiveArtifacts(artifacts: 'target/site/jacoco/index.html', onlyIfSuccessful: true)
           }
           success {
               // Actions à effectuer si le pipeline réussit
