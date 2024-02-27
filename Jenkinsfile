@@ -51,6 +51,25 @@ pipeline {
             }
         }
 
+      stage('Build docker image') {
+                steps {
+                    // Add test steps here
+                    //withSonarQubeEnv('SonarQube')
+                    sh 'docker build -t /app/kaddem-4.0 .'
+                }
+       }
+
+                    stage('Push image to Hub'){
+                               steps{
+                                   script{
+                                      withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+                                      sh 'docker login -u franck625 -p Pamfranck10'
+                                      }
+                                      sh 'docker push /app/kaddem-4.0'
+                        }
+                    }
+                }
+
 
         stage('Nexus') {
                     steps {
