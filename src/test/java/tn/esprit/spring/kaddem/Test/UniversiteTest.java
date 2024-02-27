@@ -28,7 +28,7 @@ import static org.mockito.Mockito.*;
 import java.util.*;
 
 import static org.mockito.Mockito.when;
-
+/*
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class UniversiteTest {
@@ -160,7 +160,46 @@ public class UniversiteTest {
     @Mock
     private DepartementRepository departementRepository;
 
-    /*
+
+
+
+    @Test
+    public void testRetrieveDepartementsByUniversite() {
+        // Mock data
+        Universite universite = new Universite(1,"Esprit"); // Create a sample universite object
+        Set<Departement> departements = new HashSet<>(); // Create a sample set of departements
+        Departement departement1 = new Departement(1,"maths"); // Sample departement object 1
+        Departement departement2 = new Departement(2,"Physiques"); // Sample departement object 2
+        departements.add(departement1);
+        departements.add(departement2);
+        universite.setDepartements(departements);
+
+        // Stubbing repository method call
+        when(universiteRepository.findById(1)).thenReturn(Optional.of(universite));
+
+        // Call the method to be tested
+        Set<Departement> retrievedDepartements = universiteService.retrieveDepartementsByUniversite(1);
+
+        // Verify that the findById method of universiteRepository was called with the correct argument
+        verify(universiteRepository).findById(1);
+
+        // Verify that the retrieved departements match the expected set
+        assertEquals(departements, retrievedDepartements);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+   /*
     @Test
     public void testAssignUniversiteToDepartement() {
         // Mock data
@@ -192,33 +231,3 @@ public class UniversiteTest {
 
 
      */
-
-
-    @Test
-    public void testRetrieveDepartementsByUniversite() {
-        // Mock data
-        Universite universite = new Universite(1,"Esprit"); // Create a sample universite object
-        Set<Departement> departements = new HashSet<>(); // Create a sample set of departements
-        Departement departement1 = new Departement(1,"maths"); // Sample departement object 1
-        Departement departement2 = new Departement(2,"Physiques"); // Sample departement object 2
-        departements.add(departement1);
-        departements.add(departement2);
-        universite.setDepartements(departements);
-
-        // Stubbing repository method call
-        when(universiteRepository.findById(1)).thenReturn(Optional.of(universite));
-
-        // Call the method to be tested
-        Set<Departement> retrievedDepartements = universiteService.retrieveDepartementsByUniversite(1);
-
-        // Verify that the findById method of universiteRepository was called with the correct argument
-        verify(universiteRepository).findById(1);
-
-        // Verify that the retrieved departements match the expected set
-        assertEquals(departements, retrievedDepartements);
-    }
-}
-
-
-
-

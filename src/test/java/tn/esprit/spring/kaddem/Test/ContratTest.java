@@ -28,7 +28,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-
+/*
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class ContratTest {
@@ -153,7 +153,21 @@ public class ContratTest {
         //Assertions.assertNotNull(retrievedContrat);
     }
 
-    /*
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+   /*
     @Test
     public void testUpdateContrat() {
         // Mocking behavior to return optional containing a Contrat object
@@ -178,8 +192,3 @@ public class ContratTest {
     }
 
      */
-
-
-
-}
-

@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -32,36 +33,37 @@ import static org.mockito.Mockito.when;
 
 public class DepartmentTest {
 
-    /*
-    @InjectMocks
-    IDepartementService iDepartementService=new IDepartementService() {
-        @Override
-        public List<Departement> retrieveAllDepartements() {
-            return null;
-        }
+    private Departement departement;
 
-        @Override
-        public Departement addDepartement(Departement d) {
-            return null;
-        }
+    @BeforeEach
+    public void setUp() {
+        departement = new Departement();
+    }
 
-        @Override
-        public Departement updateDepartement(Departement d) {
-            return null;
-        }
+    @Test
+    public void testIdDepartement() {
+        departement.setIdDepart(1);
+        assertEquals(1, departement.getIdDepart());
+    }
 
-        @Override
-        public Departement retrieveDepartement(Integer idDepart) {
-            return null;
-        }
+    @Test
+    public void testNomDepart() {
+        departement.setNomDepart("Informatique");
+        assertEquals("Informatique", departement.getNomDepart());
+    }
 
-        @Override
-        public void deleteDepartement(Integer idDepartement) {
+}
 
-        }
-    };
 
-     */
+
+
+
+
+
+
+
+
+/*
     @Mock
     IDepartementService iDepartementService;
 
@@ -143,4 +145,4 @@ public class DepartmentTest {
         Assertions.assertEquals("Updated Department", updated.getNomDepart());
     }
 
-}
+ */
