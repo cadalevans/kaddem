@@ -55,7 +55,7 @@ pipeline {
                 steps {
                     // Add test steps here
                     //withSonarQubeEnv('SonarQube')
-                    sh 'docker build -t /app/kaddem-4.0 .'
+                    sh 'docker build -t franck625/kaddem-4.0 .'
                 }
        }
 
