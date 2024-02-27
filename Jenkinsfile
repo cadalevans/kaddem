@@ -15,6 +15,13 @@ pipeline {
                // Execute Maven build with JaCoCo coverage
                                sh 'mvn clean install jacoco:prepare-agent test jacoco:report'
             }
+            post {
+                            always {
+                                // Archive les rapports de test Mockito JUnit
+                                junit 'target/surefire-reports/TEST-tn.esprit.rh.achat.FournisseurServiceStaticTest.xml'
+
+                            }
+                        }
         }
 
         stage('JUNIT/MOCKITO') {
@@ -22,6 +29,14 @@ pipeline {
                 // Add test steps here
                 sh 'mvn test'
             }
+               post {
+                            always {
+                                // Archive les rapports de test unitaires JUnit
+                                junit 'target/surefire-reports/TEST-*'
+
+
+                            }
+                        }
         }
 
         /*
