@@ -31,6 +31,7 @@
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -41,66 +42,42 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.9</version>
+            <version>1.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
-
-
-        <!-- https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent -->
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>org.jacoco.agent</artifactId>
-            <version>0.7.5.201505241946</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
-
-
-
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>3.12.4</version> <!-- Use the latest version -->
+            <version>0.8.7</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.sonarsource.scanner.api</groupId>
-            <artifactId>sonar-scanner-api</artifactId>
-            <version>2.12.0.1661</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/org.codehaus.sonar.plugins/sonar-core-plugin -->
-
-
-
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+        </dependency>
     </dependencies>
-    <!-- Deploy to Nexus -->
-    <distributionManagement>
-        <repository>
-            <id>deploymentRepo</id>
-            <name>Nexus Repository</name>
-            <url>http://localhost:8081/repository/maven-releases/</url>
-        </repository>
-    </distributionManagement>
 
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -112,22 +89,18 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.6</version>
+                <version>0.8.7</version>
                 <executions>
-                    <!--first execution : for preparing JaCoCo runtime agent-->
                     <execution>
-                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <!--second execution : for creating code coverage reports-->
                     <execution>
                         <id>report</id>
                         <phase>test</phase>
@@ -137,14 +110,8 @@
                     </execution>
                 </executions>
             </plugin>
-           
-
-
-
-
         </plugins>
-
-
+       
     </build>
 
 </project>
