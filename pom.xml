@@ -16,8 +16,10 @@
     <properties>
         <java.version>11</java.version>
         <sonar.login>admin</sonar.login>
-        <sonar.password>sonar</sonar.password>
+        <sonar.password>karim</sonar.password>
         <sonar.java.binaries>target/classes</sonar.java.binaries>
+        <sonar.host.url>http://localhost:8082</sonar.host.url>
+
         <!-- Deploy to Nexus -->
 
 
