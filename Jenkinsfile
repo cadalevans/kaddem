@@ -45,6 +45,14 @@ pipeline {
             }
         }
 
+           stage ('NEXUS DEPLOY') {
+
+               steps {
+               sh 'mvn deploy -DskipTests'
+                     }
+                    }
+
+                    
         stage('Nexus') {
                             steps {
                                             // Deploy the artifacts to Nexus repository
