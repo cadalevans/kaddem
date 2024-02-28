@@ -3,12 +3,6 @@ pipeline {
     
     stages {
 
-          stage('Clean') {
-            steps {
-                // Add test steps here
-                sh 'mvn clean'
-            }
-        }
         
         stage('Build') {
             steps {
@@ -62,6 +56,8 @@ pipeline {
                             }
         }
 
+        /*
+
       stage('Build docker image') {
                 steps {
                     // Add test steps here
@@ -77,13 +73,14 @@ pipeline {
                                       sh 'docker login -u franck625 -p Pamfranck10'
                                       }
                                       sh 'docker push /app/kaddem-4.0'
-                        }
+                                   }
+                               }
                     }
-                }
 
 
 
     }
+    */
 
     // Jacoco plugin with Jenkins
 
