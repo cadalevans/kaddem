@@ -45,19 +45,16 @@ pipeline {
             }
         }
 
-      stage('Nexus') {
-          steps {
-              // Deploy the artifacts to Nexus repository
-              script {
-                  withCredentials([usernamePassword(credentialsId: 'your-nexus-credentials-id', usernameVariable: 'admin', passwordVariable: 'nexus')]) {
-                      def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
-                      mvnCmd += " -DaltDeploymentRepository=deploymentRepo::default::https://192.168.33.10:8081/repository/maven-releases/ -Drepository.username=${NEXUS_USERNAME} -Drepository.password=${NEXUS_PASSWORD}" // Nexus repository URL with credentials
-                      sh mvnCmd
-                  }
-              }
-          }
-      }
-
+        stage('Nexus') {
+                            steps {
+                                            // Deploy the artifacts to Nexus repository
+                                            script {
+                                                def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
+                                                mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://192.168.33.10:8081/repository/maven-releases/' // Nexus repository URL
+                                                sh mvnCmd
+                                            }
+                            }
+        }
 
         /*
 
