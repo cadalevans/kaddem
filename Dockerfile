@@ -2,7 +2,7 @@
 FROM openjdk:11
 
 # Définit les variables d'argument pour l'URL Nexus et le chemin de l'artefact
-ARG NEXUS_URL=http://192.168.33.10:8081//repository/maven-releases
+ARG NEXUS_URL=http://192.168.33.10:8081/repository/maven-snapshots/
 ARG ARTIFACT_PATH=tn/esprit/spring/kaddem/4.0/kaddem-4.0.jar
 # Crée un répertoire pour stocker le JAR téléchargé
 RUN mkdir /app
