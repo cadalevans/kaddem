@@ -56,6 +56,26 @@ pipeline {
                                             }
                             }
         }
+        stage('Build Docker Image') {
+                    steps {
+                        script {
+                            // Utilize Docker to build the image using the provided Dockerfile
+                            docker.build('spring-app', '--build-arg NEXUS_URL=$NEXUS_URL --build-arg ARTIFACT_PATH=$ARTIFACT_PATH .')
+                        }
+                    }
+                }
+
+           stage('Push image to Hub'){
+                                   steps{
+                                       script{
+                                          withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+                                          sh 'docker login -u franck625 -p Pamfranck10'
+                                          }
+                                          sh 'docker push /app/kaddem-1.0.0'
+                                       }
+                                   }
+                        }
+
 
         /*
 
