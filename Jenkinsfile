@@ -53,7 +53,7 @@ pipeline {
                                                 //def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
                                                 //mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://192.168.33.10:8081/repository/maven-releases/' // Nexus repository URL
                                                 //sh mvnCmd
-                                                 sh 'mvn deploy'
+                                                 sh 'mvn test'
                                             }
                             }
         }
@@ -64,7 +64,7 @@ pipeline {
                             docker.build('spring-app', '--build-arg NEXUS_URL=$NEXUS_URL --build-arg ARTIFACT_PATH=$ARTIFACT_PATH .')
                         }
                     }
-                }
+        }
 
            stage('Push image to Hub'){
                                    steps{
@@ -75,7 +75,7 @@ pipeline {
                                           sh 'docker push /app/kaddem-1.0.0'
                                        }
                                    }
-                        }
+           }
 
 
      stage('Run Docker Compose') {
@@ -86,6 +86,7 @@ pipeline {
                     }
                 }
             }
+
         /*
 
       stage('Build docker image') {
