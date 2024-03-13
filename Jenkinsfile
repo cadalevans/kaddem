@@ -145,8 +145,8 @@ pipeline {
 
     // Jacoco plugin with Jenkins
 
-    
-    
+
+
  post {
         always {
             // Publish JaCoCo coverage report as artifact
@@ -168,7 +168,7 @@ pipeline {
             emailext(
                 to: 'mandoupam@gmail.com', // Replace with recipient email address
                 subject: 'Jenkins Build Notification - Failure',
-                body: "Le build Jenkins a échoué. Détails de l'erreur :\n${BUILD_LOG, maxLines=100}"
+                 body: "Le build Jenkins a échoué. Détails de l'erreur :\n${BUILD_LOG, maxLines=100}"
             )
             slackSend(color: 'danger', message: "Build failed! ${currentBuild.fullDisplayName}. Error: ${currentBuild.rawBuild.getLog(100)}")
         }
