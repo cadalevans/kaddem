@@ -77,6 +77,14 @@ pipeline {
                         }
 
 
+     stage('Run Docker Compose') {
+                steps {
+                    script {
+                        // Run Docker Compose up command to launch containers defined in the Docker Compose file
+                        sh 'docker-compose up -d'
+                    }
+                }
+            }
         /*
 
       stage('Build docker image') {
