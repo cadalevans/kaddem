@@ -53,7 +53,7 @@ pipeline {
                                                 //def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
                                                 //mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://192.168.33.10:8081/repository/maven-releases/' // Nexus repository URL
                                                 //sh mvnCmd
-                                                 sh 'mvn test'
+                                                 sh 'mvn deploy'
                                             }
                             }
         }
