@@ -4,17 +4,31 @@ pipeline {
     stages {
 
         
-        stage('Build') {
-            steps {
-               // Execute Maven build with JaCoCo coverage
+          stage('Build') {
+                   steps {
+                       echo 'Building Maven project...'
+                       script {
+                           try {
                                sh 'mvn clean install jacoco:prepare-agent test jacoco:report'
-            }
-        }
+                           } catch (Exception e) {
+                               currentBuild.result = 'FAILURE'
+                               error "Build failed: ${e.message}"
+                           }
+                       }
+                   }
+               }
 
-        stage('JUNIT/MOCKITO') {
+ stage('JUNIT/MOCKITO') {
             steps {
-                // Add test steps here
-                sh 'mvn test'
+                echo 'Running JUnit tests...'
+                script {
+                    try {
+                        sh 'mvn test'
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        error "JUnit/Mockito tests failed: ${e.message}"
+                    }
+                }
             }
         }
 
@@ -27,22 +41,27 @@ pipeline {
         }
 
         */
-          stage('Checkout GIT') {
-            steps {
-                echo 'pulling...'
-                    git branch: 'feature',
-                    url : 'https://github.com/cadalevans/kaddem.git'
-                // Add test steps here
-               
-            }
-        }
+        stage('Checkout GIT') {
+                  steps {
+                      echo 'Pulling from Git...'
+                      git branch: 'feature',
+                      url: 'https://github.com/cadalevans/kaddem.git'
+                  }
+              }
+
 
          stage('SonarQube') {
-            steps {
-                // Add test steps here
-                //withSonarQubeEnv('SonarQube')
-                sh 'mvn sonar:sonar'
-            }
+              steps {
+                          echo 'Running JUnit tests...'
+                          script {
+                              try {
+                                  sh 'mvn sonar:sonar'
+                              } catch (Exception e) {
+                                  currentBuild.result = 'FAILURE'
+                                  error "Sonarqube tests failed: ${e.message}"
+                              }
+                          }
+                      }
         }
 
                     
@@ -50,18 +69,29 @@ pipeline {
                             steps {
                                             // Deploy the artifacts to Nexus repository
                                             script {
-                                                //def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
-                                                //mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://192.168.33.10:8081/repository/maven-releases/' // Nexus repository URL
-                                                //sh mvnCmd
-                                                 sh 'mvn deploy'
+                                                try{
+                                                def mvnCmd = 'mvn deploy -DskipTests=true' // Skip tests during deployment
+                                                mvnCmd += ' -DaltDeploymentRepository=deploymentRepo::default::http://192.168.33.10:8081/repository/maven-releases/' // Nexus repository URL
+                                                sh mvnCmd
+                                                } catch (Exception e) {
+                                                     currentBuild.result = 'FAILURE'
+                                                      error "Nexus Deploy failed: ${e.message}"
+                                                }
+
                                             }
                             }
         }
+
         stage('Build Docker Image') {
                     steps {
                         script {
+                          try{
                             // Utilize Docker to build the image using the provided Dockerfile
                             docker.build('spring-app', '--build-arg NEXUS_URL=$NEXUS_URL --build-arg ARTIFACT_PATH=$ARTIFACT_PATH .')
+                             } catch (Exception e) {
+                                 currentBuild.result = 'FAILURE'
+                                 error "Nexus Deploy failed: ${e.message}"
+                                 }
                         }
                     }
         }
@@ -117,28 +147,30 @@ pipeline {
 
     
     
-  post {
-          always {
-             // Publish JaCoCo coverage report as artifact
-                         archiveArtifacts(artifacts: 'target/site/jacoco/index.html', onlyIfSuccessful: true)
-          }
-          success {
-              // Actions à effectuer si le pipeline réussit
-              echo 'Pipeline réussi!'
-              emailext(
-                  to: 'mandoupam@gmail.com', // Remplacez par l'adresse e-mail destinataire
-                  subject: 'Notification de build Jenkins - Succès',
-                  body: 'Le build Jenkins a réussi.'
-              )
-          }
-          failure {
-              // Actions à effectuer si le pipeline échoue
-              echo 'Pipeline échoué!'
-              emailext(
-                  to: 'mandoupam@gmail.com', // Remplacez par l'adresse e-mail destinataire
-                  subject: 'Notification de build Jenkins - Échec',
-                  body: 'Le build Jenkins a échoué.'
-              )
-          }
-      }
-  }
+ post {
+        always {
+            // Publish JaCoCo coverage report as artifact
+            archiveArtifacts(artifacts: 'target/site/jacoco/index.html', onlyIfSuccessful: true)
+        }
+
+        success {
+            echo 'Pipeline successful!'
+            emailext(
+                to: 'mandoupam@gmail.com', // Replace with recipient email address
+                subject: 'Jenkins Build Notification - Success',
+                body: 'The Jenkins build was successful.'
+            )
+            slackSend(color: 'good', message: "Build succeeded! ${currentBuild.fullDisplayName}")
+        }
+
+        failure {
+            echo 'Pipeline failed!'
+            emailext(
+                to: 'mandoupam@gmail.com', // Replace with recipient email address
+                subject: 'Jenkins Build Notification - Failure',
+                body: 'The Jenkins build failed.'
+            )
+            slackSend(color: 'danger', message: "Build failed! ${currentBuild.fullDisplayName}. Error: ${currentBuild.rawBuild.getLog(100)}")
+        }
+    }
+}
