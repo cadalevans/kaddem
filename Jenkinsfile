@@ -168,7 +168,7 @@ pipeline {
             emailext(
                 to: 'mandoupam@gmail.com', // Replace with recipient email address
                 subject: 'Jenkins Build Notification - Failure',
-                 body: "Le build Jenkins a échoué. Détails de l'erreur :\n${BUILD_LOG, maxLines=100}"
+                body: 'The Jenkins build failed.'
             )
             slackSend(color: 'danger', message: "Build failed! ${currentBuild.fullDisplayName}. Error: ${currentBuild.rawBuild.getLog(100)}")
         }
